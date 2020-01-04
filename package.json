@@ -19,12 +19,13 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
+    "test:ci": "CI=true react-scripts test --coverage",
+    "lint": "yarn run lint:js ; yarn run lint:css",
+    "lint:js": "eslint ./src/**/* --ext .ts,.tsx",
+    "lint:css": "stylelint './src/**/*.(ts|tsx)'",
     "eject": "react-scripts eject",
     "storybook": "start-storybook -p 9009 -s public",
     "build-storybook": "build-storybook -s public"
-  },
-  "eslintConfig": {
-    "extends": "react-app"
   },
   "browserslist": {
     "production": [
@@ -49,9 +50,25 @@
     "@storybook/addons": "^5.2.1",
     "@storybook/react": "^5.2.1",
     "@types/storybook__addon-storyshots": "^5.1.1",
+    "@typescript-eslint/eslint-plugin": "^2.14.0",
+    "@typescript-eslint/parser": "^2.14.0",
+    "eslint": "^6.8.0",
+    "eslint-config-prettier": "^6.9.0",
+    "eslint-plugin-jest": "^23.3.0",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-prettier": "^3.1.2",
+    "eslint-plugin-react": "^7.17.0",
+    "eslint-plugin-react-hooks": "^2.3.0",
+    "husky": "^3.1.0",
     "jest-styled-components": "^6.3.3",
+    "lint-staged": "^9.5.0",
+    "prettier": "^1.19.1",
     "react-test-renderer": "^16.10.2",
     "require-context.macro": "^1.2.2",
-    "styled-components": "^4.4.0"
+    "styled-components": "^4.4.0",
+    "stylelint": "^12.0.1",
+    "stylelint-config-recommended": "^3.0.0",
+    "stylelint-config-styled-components": "^0.1.1",
+    "stylelint-processor-styled-components": "^1.9.0"
   }
 }

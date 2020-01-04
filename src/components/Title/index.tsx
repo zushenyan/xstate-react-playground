@@ -1,9 +1,9 @@
 import styled from 'styled-components';
 
-interface ITitleProps {
-  textColor?: string
+interface TitleProps {
+  textColor?: string;
 }
 
 export default styled.h1`
-  color: ${({ textColor = 'red' }: ITitleProps) => textColor}
+  color: ${({ textColor = 'red' }: TitleProps): string => textColor};
 `;
