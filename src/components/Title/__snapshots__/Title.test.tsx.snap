@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Storyshots Title initial props 1`] = `
+exports[`Storyshots Title Initial Props 1`] = `
 .c0 {
   color: red;
 }
@@ -12,7 +12,7 @@ exports[`Storyshots Title initial props 1`] = `
 </h1>
 `;
 
-exports[`Storyshots Title with text 1`] = `
+exports[`Storyshots Title With Text 1`] = `
 .c0 {
   color: blue;
 }

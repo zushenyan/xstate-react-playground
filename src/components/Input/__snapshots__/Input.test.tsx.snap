@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots Input Initial Props 1`] = `
+.c0 {
+  font-size: 20px;
+  box-sizing: border-box;
+  border: 1px solid black;
+  padding: 5px;
+}
+
+<input
+  className="c0"
+  placeholder="hello world"
+/>
+`;
