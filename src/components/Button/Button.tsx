@@ -7,7 +7,7 @@ export interface Props {
 
 const Button: React.FC<Props> = ({ onClick, bgColor }: Props) => {
   return (
-    <button onClick={onClick}>aaa</button>
+    <button className="rounded-xl bg-blue shadow-md" onClick={onClick}>aaa</button>
   )
 }
 

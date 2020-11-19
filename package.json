@@ -17,6 +17,7 @@
     "web-vitals": "^0.2.4"
   },
   "scripts": {
+    "prestart": "tailwindcss build -o src/tailwind.css",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
@@ -54,6 +55,7 @@
     "@storybook/node-logger": "^6.1.0",
     "@storybook/preset-create-react-app": "^3.1.5",
     "@storybook/react": "^6.1.0",
+    "autoprefixer": "^10.0.2",
     "babel-loader": "^8.2.1",
     "eslint-config-prettier": "^6.15.0",
     "eslint-plugin-jsx-a11y": "^6.4.1",
@@ -61,6 +63,8 @@
     "eslint-plugin-react-hooks": "^4.2.0",
     "husky": "^4.3.0",
     "lint-staged": "^10.5.1",
-    "prettier": "^2.1.2"
+    "postcss": "^8.1.8",
+    "prettier": "^2.1.2",
+    "tailwindcss": "^2.0.1"
   }
 }
