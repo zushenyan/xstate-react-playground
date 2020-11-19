@@ -20,11 +20,13 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "test:ci": "CI=true react-scripts test --coverage",
+    "test:ci": "CI=true react-scripts test --coverage --passWithNoTests",
     "eject": "react-scripts eject",
     "lint:tsc": "tsc --noEmit",
     "lint:eslint": "eslint src --ext .ts,.tsx --quiet --fix",
-    "lint:fix": "yarn run lint:tsc && yarn run lint:eslint"
+    "lint:fix": "yarn run lint:tsc && yarn run lint:eslint",
+    "storybook": "start-storybook -p 6006 -s public",
+    "build-storybook": "build-storybook -s public"
   },
   "eslintConfig": {
     "extends": [
@@ -45,6 +47,14 @@
     ]
   },
   "devDependencies": {
+    "@babel/core": "^7.12.3",
+    "@storybook/addon-actions": "^6.1.0",
+    "@storybook/addon-essentials": "^6.1.0",
+    "@storybook/addon-links": "^6.1.0",
+    "@storybook/node-logger": "^6.1.0",
+    "@storybook/preset-create-react-app": "^3.1.5",
+    "@storybook/react": "^6.1.0",
+    "babel-loader": "^8.2.1",
     "eslint-config-prettier": "^6.15.0",
     "eslint-plugin-jsx-a11y": "^6.4.1",
     "eslint-plugin-prettier": "^3.1.4",
