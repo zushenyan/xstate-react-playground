@@ -1,11 +1,9 @@
 import React from 'react';
-import Button from './components/Button/Button'
+import SignUpPage from './SignUpPage'
 
-function App() {
+function App(): React.ReactElement {
   return (
-    <div className="App">
-      <Button onClick={() => null} bgColor="red" />
-    </div>
+    <SignUpPage />
   );
 }
 
