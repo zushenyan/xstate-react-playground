@@ -2,6 +2,7 @@ import React from 'react'
 import { Formik, Form } from 'formik'
 import * as Yup from 'yup'
 import MyInput from '../components/MyInput'
+import './machines/input'
 
 const SignUpPage: React.FC<unknown> = () => {
   return (
