@@ -1,6 +1,14 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 // to resolve this issue https://github.com/davidkpiano/xstate/issues/1198#issuecomment-632899035
-import { Machine, MachineOptions, Actor, State, assign, spawn } from 'xstate';
+import {
+  Machine,
+  MachineOptions,
+  Actor,
+  State,
+  assign,
+  spawn,
+  DoneInvokeEvent,
+} from 'xstate';
 import { v4 as uuid } from 'uuid';
 
 import * as todo from './todo';
@@ -12,14 +20,20 @@ export interface Context {
 export interface States {
   states: {
     init: Record<string, unknown>;
-    ready: Record<string, unknown>;
+    ready: {
+      states: {
+        standby: Record<string, unknown>;
+        saving: Record<string, unknown>;
+      };
+    };
     error: Record<string, unknown>;
   };
 }
 
 type AddEvent = { type: 'TODOS.ADD'; value: string };
+type LoadEvent = { type: 'TODOS.LOAD'; value: todo.Context[] };
 type DeleteEvent = { type: 'TODOS.DELETE'; id: string };
-export type Events = AddEvent | DeleteEvent;
+export type Events = AddEvent | DeleteEvent | LoadEvent;
 
 export const machine = Machine<Context, States, Events>({
   initial: 'init',
@@ -27,8 +41,11 @@ export const machine = Machine<Context, States, Events>({
     init: {
       invoke: {
         id: 'loadTodos',
-        src: 'initTodos',
-        onDone: 'ready',
+        src: 'loadTodos',
+        onDone: {
+          target: 'ready.standby',
+          actions: ['initTodos'],
+        },
         onError: 'error',
       },
     },
@@ -40,6 +57,12 @@ export const machine = Machine<Context, States, Events>({
         'TODOS.DELETE': {
           actions: ['delete'],
         },
+      },
+      states: {
+        standby: {
+          // activity: [''],
+        },
+        saving: {},
       },
     },
     error: {},
@@ -63,14 +86,34 @@ export const options: MachineOptions<Context, Events> = {
       todos: (context, event) =>
         context.todos.filter((todo) => todo.id !== event.id),
     }) as any,
+    saveTodos: (context: Context): void => {
+      const data = context.todos.map((todo) => todo.state.context);
+      localStorage.setItem('todos', JSON.stringify(data));
+    },
+    initTodos: assign<Context, DoneInvokeEvent<todo.Context[]>>({
+      todos: (_, event) => {
+        return event.data.map((tc) =>
+          spawn(todo.machine.withConfig(todo.options).withContext(tc), tc.id)
+        );
+      },
+    }) as any,
   },
   guards: {},
-  activities: {},
+  activities: {
+    // saveTodos: () => {
+    //   const interval = setInterval(() => undefined, 3000)
+    //   return () => clearInterval(interval)
+    // }
+  },
   services: {
-    initTodos: (): Promise<undefined> =>
-      new Promise((res) => {
-        setTimeout(res, 1000);
-      }),
+    loadTodos: (): Promise<todo.Context[]> => {
+      return new Promise((res) => {
+        setTimeout(() => {
+          const rawData = localStorage.getItem('todos') || '[]';
+          res(JSON.parse(rawData));
+        }, 1000);
+      });
+    },
   },
   delays: {},
 };

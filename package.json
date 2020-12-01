@@ -33,7 +33,7 @@
     "lint:tsc": "tsc --noEmit",
     "lint:eslint": "eslint src --ext .ts,.tsx --quiet --fix",
     "lint:fix": "yarn run lint:tsc && yarn run lint:eslint",
-    "storybook": "start-storybook -p 6006 -s public",
+    "storybook": "yarn run prestart && start-storybook -p 6006 -s public",
     "build-storybook": "build-storybook -s public"
   },
   "eslintConfig": {
