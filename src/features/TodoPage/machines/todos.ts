@@ -31,9 +31,9 @@ export interface States {
 }
 
 type AddEvent = { type: 'TODOS.ADD'; value: string };
-type LoadEvent = { type: 'TODOS.LOAD'; value: todo.Context[] };
+type SaveEvent = { type: 'TODOS.SAVE' };
 type DeleteEvent = { type: 'TODOS.DELETE'; id: string };
-export type Events = AddEvent | DeleteEvent | LoadEvent;
+export type Events = AddEvent | DeleteEvent | SaveEvent;
 
 export const machine = Machine<Context, States, Events>({
   initial: 'init',
@@ -57,12 +57,24 @@ export const machine = Machine<Context, States, Events>({
         'TODOS.DELETE': {
           actions: ['delete'],
         },
+        'TODOS.SAVE': {
+          actions: ['save'],
+        },
       },
       states: {
         standby: {
-          // activity: [''],
+          after: {
+            5000: 'saving',
+          },
         },
-        saving: {},
+        saving: {
+          invoke: {
+            id: 'saveTodos',
+            src: 'saveTodos',
+            onDone: 'standby',
+            onError: 'standby',
+          },
+        },
       },
     },
     error: {},
@@ -86,10 +98,6 @@ export const options: MachineOptions<Context, Events> = {
       todos: (context, event) =>
         context.todos.filter((todo) => todo.id !== event.id),
     }) as any,
-    saveTodos: (context: Context): void => {
-      const data = context.todos.map((todo) => todo.state.context);
-      localStorage.setItem('todos', JSON.stringify(data));
-    },
     initTodos: assign<Context, DoneInvokeEvent<todo.Context[]>>({
       todos: (_, event) => {
         return event.data.map((tc) =>
@@ -99,18 +107,22 @@ export const options: MachineOptions<Context, Events> = {
     }) as any,
   },
   guards: {},
-  activities: {
-    // saveTodos: () => {
-    //   const interval = setInterval(() => undefined, 3000)
-    //   return () => clearInterval(interval)
-    // }
-  },
+  activities: {},
   services: {
     loadTodos: (): Promise<todo.Context[]> => {
       return new Promise((res) => {
         setTimeout(() => {
           const rawData = localStorage.getItem('todos') || '[]';
           res(JSON.parse(rawData));
+        }, 1000);
+      });
+    },
+    saveTodos: (context: Context): Promise<void> => {
+      return new Promise((res) => {
+        setTimeout(() => {
+          const data = context.todos.map((todo) => todo.state.context);
+          localStorage.setItem('todos', JSON.stringify(data));
+          res();
         }, 1000);
       });
     },

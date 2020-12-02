@@ -24,7 +24,7 @@ const Todo: React.FC<Props> = ({
 
   return (
     <div className="box-border flex space-x-2">
-      <input className="box-border h-8 w-8" type="checkbox" value={completed} onChange={onChangeCompleted} />
+      <input className="box-border h-8 w-8" type="checkbox" value={completed} onChange={onChangeCompleted} checked={!!completed} />
       <input className={textInputClass} type="text" value={value} onFocus={onFocusInput} onChange={onChangeInput} onBlur={onBlurInput} disabled={completed === 1} />
       <button className="box-border h-8 w-8 rounded border-2 hover:bg-gray-100" onClick={onDelete}>-</button>
     </div>
