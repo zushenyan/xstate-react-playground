@@ -13,7 +13,7 @@ const TodoPage: React.FC<unknown> = () => {
   `
 
   return (
-    <div className="border-box py-10 px-52 space-y-2">
+    <div className="border-box px-52 space-y-2">
       <h1 className="text-4xl">Simple Todo List</h1>
       <pre>{desc}</pre>
       <Todos />
