@@ -1,10 +1,22 @@
 import React from 'react'
 
+import Reddit from './Reddit'
+
 const RedditPage: React.FC<unknown> = () => {
+  const desc = `
+    A simple reddit search which you can:
+
+    - search keyword with debounce (1s delay search when user stops typing).
+    - API requests.
+    - retry on error.
+  `
+
   return (
-    <div className="border-box px-52 space-y-2">
-      <h1 className="text-4xl">Simple Reddit Page</h1>
-    </div>
+    <>
+      <h1 className="text-4xl">Reddit Search Page</h1>
+      <pre>{desc}</pre>
+      <Reddit />
+    </>
   )
 }
 

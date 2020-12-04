@@ -32,7 +32,7 @@ function App(): React.ReactElement {
         <button onClick={() => service.send('TODO')}>Todo</button>
         <button onClick={() => service.send('REDDIT')}>Reddit</button>
       </div>
-      <div>
+      <div className="border-box px-52 space-y-2">
         {getPage(state)}
       </div>
     </div>
