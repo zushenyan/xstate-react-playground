@@ -1,6 +1,6 @@
-import React from 'react'
+import React from 'react';
 
-import Reddit from './Reddit'
+import Reddit from './Reddit';
 
 const RedditPage: React.FC<unknown> = () => {
   const desc = `
@@ -9,7 +9,7 @@ const RedditPage: React.FC<unknown> = () => {
     - search keyword with debounce (1s delay search when user stops typing).
     - API requests.
     - retry on error.
-  `
+  `;
 
   return (
     <>
@@ -17,7 +17,7 @@ const RedditPage: React.FC<unknown> = () => {
       <pre>{desc}</pre>
       <Reddit />
     </>
-  )
-}
+  );
+};
 
 export default RedditPage;

@@ -1,6 +1,12 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 // to resolve this issue https://github.com/davidkpiano/xstate/issues/1198#issuecomment-632899035
-import { Machine, MachineOptions, assign, sendParent, sendUpdate } from 'xstate';
+import {
+  Machine,
+  MachineOptions,
+  assign,
+  sendParent,
+  sendUpdate,
+} from 'xstate';
 
 export interface Context {
   id: string;
@@ -74,7 +80,7 @@ export const options: MachineOptions<Context, Events> = {
       type: 'TODOS.DELETE',
       id: context.id,
     })),
-    syncWithParent: sendUpdate()
+    syncWithParent: sendUpdate(),
   },
   guards: {
     notEmpty: (context: Context): boolean => context.value.trim().length > 0,

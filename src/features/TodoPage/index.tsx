@@ -10,7 +10,7 @@ const TodoPage: React.FC<unknown> = () => {
     - toggle completion for a todo item.
     - autosave every 5 seconds.
     - recover the state from the local storage.
-  `
+  `;
 
   return (
     <>
