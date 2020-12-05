@@ -8,10 +8,18 @@ This is a practice of XState + React. Just playing it around to see how FSM (fin
 2. `yarn install` install required node modules.
 3. `yarn run start` to get it up running.
 
+# Tech Stack
+
+- TypeScript
+- XState
+- TailwindCSS
+
 # Pages
+
 This demonstration consists of 2 pages described below:
 
 ## Todo
+
 A simple todo page that you can manage todo list with basic functions.
 
 <p align="center">
@@ -30,7 +38,8 @@ A simple todo page that you can manage todo list with basic functions.
   <img src="https://github.com/zushenyan/xstate-react-playground/blob/master/pics/todos.png">
 </p>
 
-## Reddit 
+## Reddit
+
 A reddit search page that you can search subreddits and users.
 
 <p align="center">
